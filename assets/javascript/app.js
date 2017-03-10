@@ -1,4 +1,4 @@
-// Create an object	Create an object to hold questions, answers, and correct answers, images		-10
+
 // Game timer	Function for count down timer, ends game once time runs out		-5
 // Load question	Load question utilize “this”, and for loop to append to page		-5
 // Next question	Change from current questions to next question ++		-5
@@ -8,53 +8,169 @@
 // Include CDN	5 points will be deducted for not including the jQuery CDN properly		-5
 
 
-var drinksObj = {
-	negroni: {
-		question: "What ingredients make up a negroni?",
-		answers: ["1234","5678","1111","campari, gin, sweet vermouth, orange peel"],
-		correctAnswer: "",
+var trivia = [
+	{
+		question: "Which ingredients make up a negroni?",
+		possibleAnswers: [
+		"vodka, gin, bitters, orange peel",
+		"campari, gin, dry vermouth, lemon peel",
+		"campari, vodka, sweet vermouth, lemon peel",
+		"campari, gin, sweet vermouth, orange peel"
+		],
+		correctAnswer: 3,
 		image:""
 	},
-	sazerac: {
-		question: "What ingredients make upa sazerac?",
-		answers: ["1256","cognac, absinthe, Peychaud’s bitters, sugar cube, lemon peel","7891","2222"],
-		correctAnswer: "cognac, absinthe, Peychaud’s bitters, sugar cube, lemon peel",
+	{
+		question: "Which ingredients make up a sazerac?",
+		possibleAnswers: [
+		"whiskey, absinthe, orange juice, Peychaud’s bitters, orange peel",
+		"cognac or rye whiskey, absinthe, Peychaud’s bitters, sugar cube, lemon peel",
+		"cognac or rye whiskey, absinthe, lemon juice, lemon peel",
+		"whiskey, Peychaud’s bitters, sugar cube, lemon peel"
+		],
+		correctAnswer: 1,
 		image:""
 	},
-	manhattan: {
-		question: "What ingredients make upa manhattan?",
-		answers: ["1111","sweet vermouth, whiskey, bitters, cherry","2222","3333"],
-		correctAnswer: "sweet vermouth, whiskey, bitters, cherry",
+	{
+		question: "Which ingredients make up a manhattan?",
+		possibleAnswers: [
+		"dry vermouth, whiskey, bitters, cherry",
+		"sweet vermouth, whiskey, bitters, cherry",
+		"bourbon, bitters, sugar cube, orange slice, cherry",
+		"bourbon, dry vermouth, sugar cube, orange slice, cherry"
+		],
+		correctAnswer: 1,
 		image:""
 	},
-	martini: {
-		question: "What ingredients make upa martini?",
-		answers: ["gin, dry vermouth, olive","4444","5555","6666"],
-		correctAnswer: "gin, dry vermouth, olive",
+	{
+		question: "Which ingredients make up a martini?",
+		possibleAnswers: [
+		"white rum, dry vermouth, olive or lemon peel",
+		"white rum, sweet vermouth, olive or lemon peel",
+		"gin, dry vermouth, olive or lemon peel",
+		"gin, St. Germain, olive or lemon peel"
+		],
+		correctAnswer: 2,
 		image:""
 	},
-	vesper: {
-		question: "What ingredients make upa vesper?",
-		answers: ["vodka, gin, Lillet, lemon peel","7777","8888","9999"],
-		correctAnswer: "vodka, gin, Lillet, lemon peel",
+	{
+		question: "Which ingredients make up a vesper?",
+		possibleAnswers: [
+		"vodka, gin, Lillet, lemon peel",
+		"gin, St. Germain, soda water, lemon peel",
+		"vodka, soda water, Lillet, lemon peel",
+		"vodka, gin, lemon-lime soda, lemon peel"
+		],
+		correctAnswer: 0,
 		image:""
 	},
-	mojito: {
-		question: "What ingredients make up a mojito?",
-		answers: ["1111","3333","6666","white rum, mint, soda water, lime juice, sugar"],
-		correctAnswer: "white rum, mint, soda water, lime juice, sugar",
+	{
+		question: "Which ingredients make up a mojito?",
+		possibleAnswers: [
+		"vodka, mint, water, lemon juice",
+		"gin, mint, soda water, lime juice, sugar",
+		"gin, white rum, mint, sugar",
+		"white rum, mint, soda water, lime juice, sugar"
+		],
+		correctAnswer: 3,
 		image:""
 	},
-	whiteRussion: {
-		question: "What ingredients make up a white russian?",
-		answers: ["3333","7777","coffee liquor, vodka, cream","9999"],
-		correctAnswer: "offee liquor, vodka, cream",
+	{
+		question: "Which ingredients make up a white russian?",
+		possibleAnswers: [
+		"chocolate liquor, white rum, cream",
+		"coffee liquor, white rum, cream",
+		"coffee liquor, vodka, cream",
+		"coffee liquor, vodka, egg white"
+		],
+		correctAnswer: 2,
 		image:""
 	},
-	whiskeySour: {
-		question: "What ingredients make up a whiskey sour?",
-		answers: ["0000","whiskey, lemon, simple syrup, egg white, lemon peel","7777","5555"],
-		correctAnswer: "whiskey, lemon, simple syrup, egg white, lemon peel",
+	{
+		question: "Which ingredients make up a whiskey sour?",
+		possibleAnswers: [
+		"whiskey, orange, simple syrup, egg white, orange peel",
+		"whiskey, lemon juice, simple syrup, egg white, lemon peel",
+		"whiskey, bitters, egg white, lemon peel",
+		"whiskey, dry vermouth, lemon juice, egg white, lemon peel"
+		],
+		correctAnswer: 1,
 		image:""
 	}
+];
+
+var $triviaContainer = $("#trivia-container");
+var $timerDiv = $("#timer-div");
+var $questionDiv = $('#questions-div');
+var $answerBtnsDiv = $("#answer-buttons");
+var time = 30;
+var intervalId;
+var userChoice;
+
+
+function start(){
+	// $('#finalMessage').empty();
+	// $('#correctAnswers').empty();
+	// $('#incorrectAnswers').empty();
+	// $('#unanswered').empty();
+	currentQuestion = 0;
+	correctAnswer = 0;
+	wrongAnswer = 0;
+	unanswered = 0;
+	renderQuestion();
 }
+
+start();
+
+function renderQuestion(){
+
+	$questionDiv.html('<h2>' + trivia[currentQuestion].question + '</h2>');
+	for(var i = 0; i < 4; i++){
+		var $answerBtn = $('<button>');
+		$answerBtn.text(trivia[currentQuestion].possibleAnswers[i]);
+		$answerBtn.attr({'data-index': i });
+		$answerBtn.addClass('answerChoice');
+		$answerBtnsDiv.append($answerBtn);
+	}
+	countDown();
+	$('.answerChoice').on('click',function(){
+		userChoice = $(this).data('index');
+		console.log(userChoice);
+		stopTimer();
+		evaluate();
+	});
+}
+
+function evaluate() {
+	if (userChoice === trivia[currentQuestion].correctAnswer) {
+		alert ('yay');
+	}else{
+		alert ('nope');
+	}
+}
+
+
+
+//QUESTION TIMER FUNCTIONS
+
+function thirtySecTimer() {
+	intervalId = setInterval(countDown, 1000);
+};
+    
+function countDown() {
+	time--;
+	$timerDiv.html("<h3>Time left: " + time + "</h2>");
+	if (time === 0) {
+    	stop();
+		alert("Time Up!");
+	};
+};
+
+function stopTimer() {
+	clearInterval(intervalId);
+};
+
+thirtySecTimer();
+
+//END QUESTION TIMER FUNCTIONS
+
