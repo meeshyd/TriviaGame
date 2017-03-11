@@ -24,17 +24,6 @@ footer {
 	padding-bottom: 20px;
 }
 
-#end-message {
-	margin-top: 20px;
-	margin-bottom: 30px;
-}
-#correct-ct, #wrong-ct {
-	margin-bottom: 10px;
-}
-#unanswered-ct {
-	margin-bottom: 40px;
-}
-
 h1 {
 	margin: 0 auto;
 	height: 120px;
@@ -51,12 +40,25 @@ h1 {
 h2 {
 	font-size: 20px;
 }
+
+#end-message {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+#correct-ct, #wrong-ct {
+	margin-bottom: 10px;
+}
+#unanswered-ct {
+	margin-bottom: 40px;
+}
+
 #trivia-container {
 	flex: 1;
 }
 #trivia-container, #questions-div {
 	margin: 0 auto;
 }
+/*BUTTON CSS*/
 
 #start-reset-div button {
 	width: 300px;
@@ -92,3 +94,34 @@ button:hover, button:active, ul li:hover, ul li:active {
 ul {
 	padding: 0;
 }
+
+/*MEDIA QUERY CSS*/
+@media only screen and (max-width: 600px) {
+
+	h1 {
+		font-size: 40px;
+	}
+
+	h2, .answer-choice, button {
+		font-size: 15px;
+		width: 90%;
+	}
+	#trivia-container {
+		width: 95%;
+		margin: 0 auto;
+		padding: 0;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
