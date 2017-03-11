@@ -110,13 +110,13 @@ $( document ).ready(function() {
 		$startResetDiv.append($startButton);
 
 		$startButton.on('click', function() {
+			$(this).hide();
 			renderQuestion();
 		});
 });
 
 function renderQuestion(){
 	$answerChoicesDiv.empty();
-	$startResetDiv.empty();
 	$questionDiv.html('<h2>' + trivia[currentQuestion].question + '</h2>');
 	for(var i = 0; i < 4; i++){
 		var $answerChoice = $('<li>');
@@ -165,7 +165,6 @@ function evaluate() {
 
 function gameOver() {
 	$answerChoicesDiv.empty();
-	$startResetDiv.empty();
 	$questionDiv.empty();
 
 	$endMessageDiv.text("All done! Here's how you did:");
@@ -178,6 +177,7 @@ function gameOver() {
 	$startResetDiv.append($resetButton);
 
 	$resetButton.on('click', function() {
+		$(this).hide();
 		currentQuestion = 0;
 		correctAnswerCt = 0;
 		wrongAnswerCt = 0;
