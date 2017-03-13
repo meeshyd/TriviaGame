@@ -1,3 +1,4 @@
+//game object stores Qs, possible answers, the index of the correct answer, and image URL
 var trivia = [
 	{
 		question: "Which set of ingredients make a Negroni?",
@@ -88,6 +89,7 @@ var trivia = [
 		image:"http://pipsum.com/200x310.jpg"
 	}
 ];
+//global variables
 var $triviaContainer = $('#trivia-container');
 var $timerDiv = $('#timer-div');
 var $questionDiv = $('#questions-div');
@@ -100,6 +102,7 @@ var $unansweredCtDiv = $('#unanswered-ct');
 var seconds; var intervalId; var userChoice; var currentQuestion;
 var correctAnswerCt; var wrongAnswerCt; var unansweredCt;
 
+//start function
 $( document ).ready(function() {
 		currentQuestion = 0;
 		correctAnswerCt = 0;
@@ -115,6 +118,10 @@ $( document ).ready(function() {
 		});
 });
 
+//function to display question and possible answers.
+//calls function to start 20 second timer
+//When a possible answer is clicked, the index of the choice is stored in a varible,
+//the timer is stoped and the evaluate function is called
 function renderQuestion(){
 	$answerChoicesDiv.empty();
 	$questionDiv.html('<h2>' + trivia[currentQuestion].question + '</h2>');
@@ -134,6 +141,10 @@ function renderQuestion(){
 	});
 }
 
+//this function evaluates whether correct answer has been picked - 
+//will perform different actions depending on whether time has run out (unansswered), correct answer picked, 
+//or inccorect answer picked. 
+//also evaluates whether all questions have been answered- if yes, execute game over function. if no, next question
 function evaluate() {
 	var answerIndex = trivia[currentQuestion].correctAnswer;
 	
@@ -146,7 +157,7 @@ function evaluate() {
 	}else if (userChoice === answerIndex) {
 		$answerChoicesDiv.empty();
 		$questionDiv.html("<p>Correct!</p>");
-		$questionDiv.append("<img src=" + trivia[currentQuestion].image + ">");
+		$questionDiv.append("<img src=" + trivia[currentQuestion].image + ">").hide().fadeIn(1000);
 		correctAnswerCt++;
 
 	}else{
@@ -163,6 +174,8 @@ function evaluate() {
 	};	
 }
 
+//game over function displays correct/incorrect/unanswered question counts and a reset button. 
+//reset button empties divs, sets score variables to 0 and calls the question function
 function gameOver() {
 	$answerChoicesDiv.empty();
 	$questionDiv.empty();
@@ -190,7 +203,8 @@ function gameOver() {
 	});
 };
 
-//TIMER FUNCTIONS
+//timer functions - displays a countdown on screen, allows 20 seconds for each question
+//also considers when time has run out- if < 1 sec, timer stops and evaluate function is called
 function timer() {
 	seconds=20;
 	$timerDiv.html("<h3>Time left: " + seconds + "</h3>");

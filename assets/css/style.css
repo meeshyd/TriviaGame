@@ -1,3 +1,4 @@
+/*GENERAL CSS STARTS HERE*/
 html {
 	height: 100%;
 }
@@ -58,8 +59,7 @@ h2 {
 #trivia-container, #questions-div {
 	margin: 0 auto;
 }
-/*BUTTON CSS*/
-
+/*BUTTON CSS STARTS HERE*/
 #start-reset-div button {
 	width: 300px;
 	margin: 0 auto;
@@ -95,7 +95,7 @@ ul {
 	padding: 0;
 }
 
-/*MEDIA QUERY CSS*/
+/*MEDIA QUERY CSS STARTS HERE*/
 @media only screen and (max-width: 600px) {
 
 	h1 {
