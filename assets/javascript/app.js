@@ -157,7 +157,7 @@ function evaluate() {
 	}else if (userChoice === answerIndex) {
 		$answerChoicesDiv.empty();
 		$questionDiv.html("<p>Correct!</p>");
-		$questionDiv.append("<img src=" + trivia[currentQuestion].image + ">").hide().fadeIn(1000);
+		$questionDiv.append("<img src=" + trivia[currentQuestion].image + ">").hide().fadeIn(900);
 		correctAnswerCt++;
 
 	}else{
