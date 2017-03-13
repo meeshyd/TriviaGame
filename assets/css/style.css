@@ -38,7 +38,7 @@ h1 {
     -webkit-background-clip: text;
     font-family: 'Limelight', cursive;
 }
-h2 {
+p {
 	font-size: 20px;
 }
 
@@ -46,9 +46,11 @@ h2 {
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
+
 #correct-ct, #wrong-ct {
 	margin-bottom: 10px;
 }
+
 #unanswered-ct {
 	margin-bottom: 40px;
 }
@@ -56,8 +58,15 @@ h2 {
 #trivia-container {
 	flex: 1;
 }
+
 #trivia-container, #questions-div {
 	margin: 0 auto;
+}
+
+img {
+	width: auto;
+	height: 250px;
+	padding-top: 30px;
 }
 /*BUTTON CSS STARTS HERE*/
 #start-reset-div button {
@@ -100,17 +109,33 @@ ul {
 
 	h1 {
 		font-size: 40px;
+		height: 100px;
 	}
 
-	h2, .answer-choice, button {
+	p, .answer-choice, button, #questions-div {
 		font-size: 15px;
-		width: 90%;
+		width: 85%;
+		text-align: center;
+		margin: 20px auto 0 auto;
 	}
-	#trivia-container {
-		width: 95%;
-		margin: 0 auto;
+
+	#questions-div {
 		padding: 0;
+		margin: 0 auto;
+		width: 100%;
 	}
+
+	#trivia-container {
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	img {
+		height: 200px;
+		width: auto;
+	}
+
+
 
 
 

@@ -9,7 +9,7 @@ var trivia = [
 		"Campari, gin, sweet vermouth, orange peel"
 		],
 		correctAnswer: 3,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/negroni.svg"
 	},
 	{
 		question: "Which set of ingredients make a Sazerac?",
@@ -20,7 +20,7 @@ var trivia = [
 		"whiskey, Peychaud's bitters, sugar cube, lemon peel"
 		],
 		correctAnswer: 1,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/sazerac.svg"
 	},
 	{
 		question: "Which set of ingredients make a Manhattan?",
@@ -31,7 +31,7 @@ var trivia = [
 		"bourbon, dry vermouth, sugar cube, orange slice, cherry"
 		],
 		correctAnswer: 1,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/manhattan.svg"
 	},
 	{
 		question: "Which set of ingredients make a Martini?",
@@ -42,7 +42,7 @@ var trivia = [
 		"gin, St. Germain, olive or lemon peel"
 		],
 		correctAnswer: 2,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/martini.svg"
 	},
 	{
 		question: "Which set of ingredients make a Vesper?",
@@ -53,7 +53,7 @@ var trivia = [
 		"vodka, gin, lemon-lime soda, lemon peel"
 		],
 		correctAnswer: 0,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/vesper.svg"
 	},
 	{
 		question: "Which set of ingredients make a Mojito?",
@@ -64,7 +64,7 @@ var trivia = [
 		"white rum, mint, soda water, lime juice, sugar"
 		],
 		correctAnswer: 3,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/mojito.svg"
 	},
 	{
 		question: "Which set of ingredients make a White Russian?",
@@ -75,7 +75,7 @@ var trivia = [
 		"coffee liquor, vodka, egg white"
 		],
 		correctAnswer: 2,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/white-russian.svg"
 	},
 	{
 		question: "Which set of ingredients make a Whiskey Sour?",
@@ -86,7 +86,7 @@ var trivia = [
 		"whiskey, dry vermouth, lemon juice, egg white, lemon peel"
 		],
 		correctAnswer: 1,
-		image:"http://pipsum.com/200x310.jpg"
+		image:"assets/images/whiskey-sour.svg"
 	}
 ];
 //global variables
@@ -124,7 +124,7 @@ $( document ).ready(function() {
 //the timer is stoped and the evaluate function is called
 function renderQuestion(){
 	$answerChoicesDiv.empty();
-	$questionDiv.html('<h2>' + trivia[currentQuestion].question + '</h2>');
+	$questionDiv.html('<p>' + trivia[currentQuestion].question + '</p>');
 	for(var i = 0; i < 4; i++){
 		var $answerChoice = $('<li>');
 		$answerChoice.text(trivia[currentQuestion].possibleAnswers[i]);
@@ -180,10 +180,10 @@ function gameOver() {
 	$answerChoicesDiv.empty();
 	$questionDiv.empty();
 
-	$endMessageDiv.text("All done! Here's how you did:");
-	$correctCtDiv.text("Correct Answers: " + correctAnswerCt);
-	$wrongCtDiv.text("Wrong Answers: " + wrongAnswerCt);
-	$unansweredCtDiv.text("Unanswered Questions: " + unansweredCt);
+	$endMessageDiv.html('<p>'+ "All done! Here's how you did:" + '</p>');
+	$correctCtDiv.html('<p>'+ "Correct Answers: " + correctAnswerCt + '</p>');
+	$wrongCtDiv.html('<p>'+ "Wrong Answers: " + wrongAnswerCt + '</p>');
+	$unansweredCtDiv.html('<p>'+ "Unanswered Questions: " + unansweredCt + '</p>');
 
 	var $resetButton = $('<button>');
 	$resetButton.text("Start Over")
@@ -207,13 +207,13 @@ function gameOver() {
 //also considers when time has run out- if < 1 sec, timer stops and evaluate function is called
 function timer() {
 	seconds=20;
-	$timerDiv.html("<h3>Time left: " + seconds + "</h3>");
+	$timerDiv.html("<p>Time left: " + seconds + "</p>");
 	time = setInterval(countDown, 1000);
 };
     
 function countDown() {
 	seconds--;
-	$timerDiv.html("<h3>Time left: " + seconds + "</h3>");
+	$timerDiv.html("<p>Time left: " + seconds + "</p>");
 	if (seconds < 1) {
     	clearInterval(time);
     	evaluate();
